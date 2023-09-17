@@ -1,7 +1,8 @@
 from flask import Flask, request
 
 todo_list = [{
-    "title": "Create git repository"
+    "title": "Create git repository",
+    "completed": False
 }
 ]
 app = Flask(__name__)
@@ -14,7 +15,10 @@ def get_todos():
 @app.post("/todos")
 def create_todo():
     data = request.get_json()
-    new_todo = {"title": data["title"]}
+    new_todo = {
+        "title": data["title"],
+        "completed": data["completed"]        
+                }
     todo_list.append(new_todo)
     return new_todo, 201
     
